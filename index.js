@@ -1,31 +1,70 @@
-/* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
-   Complete the below for code reviewers' convenience:
+function Inhabitnat(props) {
+    this.species = props.species;
+    this.name = props.name;
+    this.sex = props.sex;
+    this.arms = props.arms;
+    this.legs = props.legs;
+    this.sound = props.sound;
+    this.friends = props.friends;
+    this.inhabitnatInfo = function() {
+        return JSON.stringify(this)
+        .split('')
+        .map(function (el) {
+            return el === '"' || el === '[' || el === ']' ? '' : el === ',' ? '; ' : el
+        })
+        .join('')
+        .slice(1, -1);
+    }
+}
 
-   Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
-   */
+const man = new Inhabitnat({
+    species: 'human',
+    name: 'Jhon',
+    sex: 'male',
+    arms: 2,
+    legs: 2,
+    sound: 'Hello girls'
+});
 
-// ======== OBJECTS DEFINITIONS ========
-// Define your objects here
+const woman = new Inhabitnat({
+    species: 'human',
+    name: 'Whitney',
+    sex: 'female',
+    arms: 2,
+    legs: 2,
+    sound: 'Hello boys',
+    friends: ['Houston']
+});
 
+const cat = new Inhabitnat({
+    species: 'cat',
+    name: 'Houston',
+    sex: 'male',
+    legs: 4,
+    sound: 'Meow-meow',
+    friends: ['Whitney']
+});
 
-// ======== OUTPUT ========
-/* Use print(message) for output.
-   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
+const dog = new Inhabitnat({
+    species: 'dog',
+    name: 'Rex',
+    sex: 'male',
+    legs: 4,
+    sound: 'Barking'
+});
 
-   Message can contain HTML markup. You may also tweak index.html and/or styles.css.
-   However, please, REFRAIN from improving visuals at least until your code is reviewed
-   so code reviewers might focus on a single file that is index.js.
-   */
+const catWoman = new Inhabitnat({
+    species: 'human',
+    name: 'Selina',
+    sex: 'female',
+    arms: 2,
+    legs: 2,
+    sound: (typeof cat === 'undefined') ? 'Hello kitties' : cat.sound, 
+    friends: ['Whitney', 'Houston']
+});
 
-/* Print examples:
-   print('ABC');
-   print('<strong>ABC</strong>');
-   print('<strong>ABC</strong>', 'div');
-
-   print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-   */
-
-
+print(man.inhabitnatInfo());
+print(woman.inhabitnatInfo());
+print(cat.inhabitnatInfo());
+print(dog.inhabitnatInfo());
+print(catWoman.inhabitnatInfo());
