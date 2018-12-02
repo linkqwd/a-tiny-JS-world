@@ -1,70 +1,77 @@
-function Inhabitant(props) {
-    this.species = props.species;
-    this.name = props.name;
-    this.sex = props.sex;
-    this.arms = props.arms;
-    this.legs = props.legs;
-    this.sound = props.sound;
-    this.friends = props.friends;
-    this.getInhabitantInfo = function () {
-        return this.species + '; '
-            + this.name + '; '
-            + this.sex + '; '
-            + this.arms + '; '
-            + this.legs + '; '
-            + this.sound + '; '
-            + this.friends
+const human = (props) => {
+    let defaultProperties = {
+        species: 'human',
+        arms: '2',
+        legs: '2',
     }
+    return Object.assign(props, defaultProperties)
 }
 
-const man = new Inhabitant({
-    species: 'human',
+const cat = (props) => {
+    let defaultProperties = {
+        species: 'cat',
+        paws: 4
+    }
+    return Object.assign(props, defaultProperties, meower())
+}
+
+const dog = (props) => {
+    let defaultProperties = {
+        species: 'dog',
+        paws: 4
+    }
+    return Object.assign(props, defaultProperties)
+}
+
+const catWomen = (props) => {
+    return Object.assign(human(props), meower())
+}
+
+function meower (arg) {
+    return {sound: arg || 'Moewing'}
+}
+
+const jhon = human({
     name: 'Jhon',
     sex: 'male',
-    arms: 2,
-    legs: 2,
-    sound: 'Hello girls'
+    sound: 'How your doin\'',
+    friends: ['Rex', 'selina']
 });
 
-const woman = new Inhabitant({
-    species: 'human',
-    name: 'Whitney',
+const whitney = human({
+    name: 'whitney',
     sex: 'female',
-    arms: 2,
-    legs: 2,
-    sound: 'Hello boys',
-    friends: ['Houston']
+    sound: 'Hi guys',
+    friends: ['Rex', 'selina']
 });
 
-const cat = new Inhabitant({
-    species: 'cat',
+const houston = cat({
     name: 'Houston',
     sex: 'male',
-    legs: 4,
-    sound: 'Meow-meow',
-    friends: ['Whitney']
+    friends: ['selina']
 });
 
-const dog = new Inhabitant({
-    species: 'dog',
+const rex = dog({
     name: 'Rex',
     sex: 'male',
-    legs: 4,
-    sound: 'Barking'
+    sound: 'barking',
+    friends: ['jhon']
 });
 
-const catWoman = new Inhabitant({
-    species: 'human',
-    name: 'Selina',
+const selina = catWomen({
+    name: 'selina',
     sex: 'female',
-    arms: 2,
-    legs: 2,
-    sound: (typeof cat === 'undefined') ? 'Hello kitties' : cat.sound,
-    friends: ['Whitney', 'Houston']
+    friends: ['Houston', 'whitney']
 });
 
-print(man.getInhabitantInfo());
-print(woman.getInhabitantInfo());
-print(cat.getInhabitantInfo());
-print(dog.getInhabitantInfo());
-print(catWoman.getInhabitantInfo());
+function getInhabitantInfo (object) {
+    return Object.entries(object)
+        .map(value => `<strong>${value[0]}:</strong> ${value[1]}`)
+        .join('; ')
+}
+
+print(getInhabitantInfo(jhon))
+print(getInhabitantInfo(whitney))
+print(getInhabitantInfo(houston))
+print(getInhabitantInfo(rex))
+print(getInhabitantInfo(selina))
