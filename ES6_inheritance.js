@@ -3,7 +3,6 @@ class Inhabitant {
         this.name = props.name;
         this.sex = props.sex;
         this.sound = props.sound;
-        this.friends = props.friends;
     }
 
     static getInhabitantInfo(instance) {
@@ -41,28 +40,25 @@ class Dog extends Inhabitant {
 const jhon = new Human({
     name: 'Jhon',
     sex: 'male',
-    sound: 'How your doin\'',
-    friends: ['Rex', 'Whitney']
+    sound: 'How your doin\''
 });
 
 const whitney = new Human({
     name: 'Whitney',
     sex: 'female',
-    friends: ['Houston']
+    sound: 'Hi guys'
 });
 
 const houston = new Cat({
     name: 'Houston',
     sex: 'male',
-    sound: 'Mmmrrrrr',
-    friends: ['Whitney']
+    sound: 'Mmmrrrrr'
 });
 
 const rex = new Dog({
     name: 'Rex',
     sex: 'male',
-    sound: 'Ggrrrrr',
-    friends: ['Jhon']
+    sound: 'Ggrrrrr'
 });
 
 print(Inhabitant.getInhabitantInfo(jhon));

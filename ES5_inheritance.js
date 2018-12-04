@@ -2,17 +2,10 @@ function Inhabitant(props) {
     this.name = props.name;
     this.sex = props.sex;
     this.sound = props.sound;
-    this.friends = props.friends;
 }
 
 Inhabitant.prototype.getInhabitantInfo = function () {
-    return this.species + '; '
-        + this.name + '; '
-        + this.sex + '; '
-        + this.arms + '; '
-        + this.legs + '; '
-        + this.sound + '; '
-        + this.friends
+    return Object.values(this).join('; ')
 }
 
 function Human(props) {
@@ -43,27 +36,23 @@ Dog.prototype = Object.create(Inhabitant.prototype);
 var jhon = new Human({
     name: 'Jhon',
     sex: 'male',
-    sound: 'How your doin\'',
-    friends: ['Rex']
+    sound: 'How your doin\''
 });
 
 var whitney = new Human({
     name: 'Whitney',
     sex: 'female',
-    sound: 'Hello boys',
-    friends: ['Houston']
+    sound: 'Hello boys'
 });
 
 var houston = new Cat({
     name: 'Houston',
-    sex: 'male',
-    friends: ['Whitney']
+    sex: 'male'
 });
 
 var rex = new Dog({
     name: 'Rex',
-    sex: 'male',
-    friends: ['Jhon']
+    sex: 'male'
 });
 
 print(jhon.getInhabitantInfo());
